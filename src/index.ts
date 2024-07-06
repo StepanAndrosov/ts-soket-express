@@ -14,7 +14,6 @@ const io = new Server(server, {
 });
 
 export async function startApp() {
-
   app.get('/', (req, res) => {
     res.send('Hello!');
   });
@@ -29,7 +28,7 @@ export async function startApp() {
 
   io.on('connection', (socket) => {
     socket.on('chat message', (msg) => {
-      console.log(msg)
+      console.log(msg);
       io.emit('chat message', msg);
     });
   });
