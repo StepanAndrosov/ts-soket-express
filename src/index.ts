@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import { createServer } from 'node:http';
 import { Server } from 'socket.io';
+import { setupAmqp } from './services/rabbitMQ.js';
 
 const port = process.env.PORT || 5000;
 
@@ -36,6 +37,8 @@ export async function startApp() {
   server.listen(port, () => {
     console.log(`Listening on port: ${port}`);
   });
+
+  await setupAmqp()
 }
 
 startApp();
