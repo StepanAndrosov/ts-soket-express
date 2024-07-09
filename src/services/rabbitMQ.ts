@@ -1,6 +1,6 @@
 import { connect } from 'amqplib';
 
-const AMQP_URL = 'amqp://admin:password@localhost:5672';
+const AMQP_URL = 'amqp://admin:123456@ha-bus:5672'; //  amqp://admin:password@localhost:5672
 
 export async function setupAmqp() {
   const connection = await connect(AMQP_URL);
