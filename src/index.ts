@@ -19,6 +19,8 @@ export async function startApp() {
     res.send('Hello!');
   });
 
+  const { sendToQueue } = await setupAmqp()
+
   io.on('connection', (socket) => {
     console.log(`${socket.id} user connected`);
 
@@ -31,6 +33,7 @@ export async function startApp() {
     socket.on('chat message', (msg) => {
       console.log(msg);
       io.emit('chat message', msg);
+      sendToQueue(msg)
     });
   });
 
@@ -38,7 +41,7 @@ export async function startApp() {
     console.log(`Listening on port: ${port}`);
   });
 
-  await setupAmqp()
+
 }
 
 startApp();
