@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import { createServer } from 'node:http';
 import { Server } from 'socket.io';
-import { setupAmqp } from './services/rabbitMQ.js';
+// import { setupAmqp } from './services/rabbitMQ.js';
 
 const port = process.env.PORT || 5000;
 
@@ -19,7 +19,7 @@ export async function startApp() {
     res.send('Hello!');
   });
 
-  const { sendToQueue } = await setupAmqp()
+  // const { sendToQueue } = await setupAmqp()
 
   io.on('connection', (socket) => {
     console.log(`${socket.id} user connected`);
@@ -33,7 +33,7 @@ export async function startApp() {
     socket.on('chat message', (msg) => {
       console.log(msg);
       io.emit('chat message', { message: msg.message, id: socket.id });
-      sendToQueue(msg)
+      // sendToQueue(msg)
     });
   });
 
